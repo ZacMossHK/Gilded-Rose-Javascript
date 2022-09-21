@@ -44,6 +44,10 @@ class Shop {
       return true;
     }
   }
+
+  conjuredItemCheck(item) {
+    if (item.name === "Conjured Mana Cake") return true;
+  }
 }
 
 module.exports = {
