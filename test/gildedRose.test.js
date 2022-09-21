@@ -107,4 +107,11 @@ describe("Gilded Rose", function () {
       gildedRose.conjuredItemCheck(new Item("Conjured Mana Cake", 1, 1))
     ).toBe(true);
   });
+
+  it("conjured: sellIn -1, quality -2", () => {
+    const gildedRose = new Shop([new Item("Conjured Mana Cake", 10, 10)]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(9);
+    expect(item.quality).toBe(8);
+  });
 });
