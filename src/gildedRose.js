@@ -48,7 +48,7 @@ class Shop {
 
   conjuredItemCheck(item) {
     if (item.name === "Conjured Mana Cake") {
-      item.quality -= 2;
+      item.quality -= item.sellIn >= 0 ? 2 : 4;
       return true;
     }
   }
