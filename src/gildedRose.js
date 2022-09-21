@@ -25,7 +25,6 @@ class Shop {
       item.quality += item.sellIn >= 0 ? 1 : 2;
       return true;
     }
-    return false;
   }
 
   backstagePassesCheck(item) {
@@ -33,7 +32,6 @@ class Shop {
       item.quality += 1;
       return true;
     }
-    return false;
   }
 }
 
