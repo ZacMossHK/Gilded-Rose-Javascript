@@ -16,7 +16,8 @@ class Shop {
     const brieCheck = this.agedBrieCheck(this.items[0]);
     const backstageCheck = this.backstagePassesCheck(this.items[0]);
     const sulfurasCheck = this.sulfurasCheck(this.items[0]);
-    if (!(brieCheck || backstageCheck || sulfurasCheck))
+    const conjuredItemCheck = this.conjuredItemCheck(this.items[0]);
+    if (!(brieCheck || backstageCheck || sulfurasCheck || conjuredItemCheck))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
     return this.items;
   }
@@ -46,7 +47,10 @@ class Shop {
   }
 
   conjuredItemCheck(item) {
-    if (item.name === "Conjured Mana Cake") return true;
+    if (item.name === "Conjured Mana Cake") {
+      item.quality -= 2;
+      return true;
+    }
   }
 }
 
