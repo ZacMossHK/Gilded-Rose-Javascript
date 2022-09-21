@@ -11,6 +11,8 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
+    this.items[0].sellIn--;
+    this.items[0].quality--;
     return this.items;
   }
 }
