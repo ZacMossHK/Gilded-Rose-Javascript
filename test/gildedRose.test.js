@@ -1,6 +1,11 @@
 const { Shop, Item } = require("../src/gildedRose");
 
 describe("Gilded Rose", function () {
+  it("returns an empty array with no items", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.updateQuality()).toEqual([]);
+  });
+
   it("normal item: sellIn -1 and quality -1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 1)]);
     const item = gildedRose.updateQuality()[0];

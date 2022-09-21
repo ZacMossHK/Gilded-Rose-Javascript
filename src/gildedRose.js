@@ -12,6 +12,7 @@ class Shop {
   }
 
   updateQuality() {
+    if (!this.items.length) return [];
     this.items[0].sellIn--;
     if (!this.isSpecialItem(this.items[0]))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
