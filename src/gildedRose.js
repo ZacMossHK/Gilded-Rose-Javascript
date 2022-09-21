@@ -15,7 +15,8 @@ class Shop {
     this.items[0].sellIn--;
     const brieCheck = this.agedBrieCheck(this.items[0]);
     const backstageCheck = this.backstagePassesCheck(this.items[0]);
-    if (!(brieCheck || backstageCheck))
+    const sulfurasCheck = this.sulfurasCheck(this.items[0]);
+    if (!(brieCheck || backstageCheck || sulfurasCheck))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
     return this.items;
   }
