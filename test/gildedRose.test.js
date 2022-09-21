@@ -155,4 +155,23 @@ describe("Gilded Rose", function () {
     expect(item.sellIn).toBe(0);
     expect(item.quality).toBe(50);
   });
+
+  it("works with an array of multiple items", () => {
+    const shopItems = [
+      new Item("Aged Brie", 10, 10),
+      new Item("Conjured Mana Cake", 10, 10),
+      new Item("foo", 10, 10),
+    ];
+    const gildedRose = new Shop(shopItems);
+    const resultItems = gildedRose.updateQuality();
+    expect(resultItems[0].name).toBe("Aged Brie");
+    expect(resultItems[0].sellIn).toBe(9);
+    expect(resultItems[0].sellIn).toBe(11);
+    expect(resultItems[1].name).toBe("Conjured Mana Cake");
+    expect(resultItems[1].sellIn).toBe(9);
+    expect(resultItems[1].sellIn).toBe(8);
+    expect(resultItems[1].name).toBe("foo");
+    expect(resultItems[1].sellIn).toBe(9);
+    expect(resultItems[1].sellIn).toBe(9);
+  });
 });
