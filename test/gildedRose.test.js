@@ -17,8 +17,8 @@ describe("Gilded Rose", function () {
 
   it("brie: check method returns true", () => {
     const gildedRose = new Shop();
-    expect(gildedRose.agedBrieCheck(new Item("foo", 1, 1))).toBe(undefined);
-    expect(gildedRose.agedBrieCheck(new Item("Aged Brie", 1, 1))).toBe(true);
+    expect(gildedRose.isAgedBrie(new Item("foo", 1, 1))).toBe(undefined);
+    expect(gildedRose.isAgedBrie(new Item("Aged Brie", 1, 1))).toBe(true);
   });
 
   it("brie: sellIn -1 and quality +1", () => {
@@ -37,11 +37,9 @@ describe("Gilded Rose", function () {
 
   it("backstages passes: check method returns true", () => {
     const gildedRose = new Shop();
-    expect(gildedRose.backstagePassesCheck(new Item("foo", 1, 1))).toBe(
-      undefined
-    );
+    expect(gildedRose.isBackstagePass(new Item("foo", 1, 1))).toBe(undefined);
     expect(
-      gildedRose.backstagePassesCheck(
+      gildedRose.isBackstagePass(
         new Item("Backstage passes to a TAFKAL80ETC concert", 1, 1)
       )
     ).toBe(true);
@@ -85,9 +83,9 @@ describe("Gilded Rose", function () {
 
   it("sulfuras: check method returns true", () => {
     const gildedRose = new Shop();
-    expect(gildedRose.sulfurasCheck(new Item("foo", 1, 1))).toBe(undefined);
+    expect(gildedRose.isSulfuras(new Item("foo", 1, 1))).toBe(undefined);
     expect(
-      gildedRose.sulfurasCheck(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
+      gildedRose.isSulfuras(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
     ).toBe(true);
   });
 
@@ -102,10 +100,10 @@ describe("Gilded Rose", function () {
 
   it("conjured: check method returns true", () => {
     const gildedRose = new Shop();
-    expect(gildedRose.conjuredItemCheck(new Item("foo", 1, 1))).toBe(undefined);
-    expect(
-      gildedRose.conjuredItemCheck(new Item("Conjured Mana Cake", 1, 1))
-    ).toBe(true);
+    expect(gildedRose.isConjured(new Item("foo", 1, 1))).toBe(undefined);
+    expect(gildedRose.isConjured(new Item("Conjured Mana Cake", 1, 1))).toBe(
+      true
+    );
   });
 
   it("conjured: sellIn -1, quality -2", () => {

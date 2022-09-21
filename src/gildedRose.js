@@ -13,25 +13,30 @@ class Shop {
 
   updateQuality() {
     this.items[0].sellIn--;
-    const brieCheck = this.agedBrieCheck(this.items[0]);
-    const backstageCheck = this.backstagePassesCheck(this.items[0]);
-    const sulfurasCheck = this.sulfurasCheck(this.items[0]);
-    const conjuredItemCheck = this.conjuredItemCheck(this.items[0]);
-    if (!(brieCheck || backstageCheck || sulfurasCheck || conjuredItemCheck))
+    if (!this.isSpecialItem(this.items[0]))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
     if (this.items[0].quality < 0) this.items[0].quality = 0;
     if (this.items[0].quality > 50) this.items[0].quality = 50;
     return this.items;
   }
 
-  agedBrieCheck(item) {
+  isSpecialItem(item) {
+    return [
+      this.isAgedBrie,
+      this.isBackstagePass,
+      this.isSulfuras,
+      this.isConjured,
+    ].some((method) => method(item));
+  }
+
+  isAgedBrie(item) {
     if (item.name === "Aged Brie") {
       item.quality += item.sellIn >= 0 ? 1 : 2;
       return true;
     }
   }
 
-  backstagePassesCheck(item) {
+  isBackstagePass(item) {
     if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
       item.quality++;
       if (item.sellIn < 10) item.quality++;
@@ -41,14 +46,14 @@ class Shop {
     }
   }
 
-  sulfurasCheck(item) {
+  isSulfuras(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") {
       item.sellIn++;
       return true;
     }
   }
 
-  conjuredItemCheck(item) {
+  isConjured(item) {
     if (item.name === "Conjured Mana Cake") {
       item.quality -= item.sellIn >= 0 ? 2 : 4;
       return true;
