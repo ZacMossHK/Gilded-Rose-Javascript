@@ -12,12 +12,12 @@ class Shop {
   }
 
   updateQuality() {
-    if (!this.items.length) return [];
-    this.items[0].sellIn--;
-    if (!this.isSpecialItem(this.items[0]))
-      this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
-    if (this.items[0].quality < 0) this.items[0].quality = 0;
-    if (this.items[0].quality > 50) this.items[0].quality = 50;
+    this.items.forEach((item) => {
+      item.sellIn--;
+      if (!this.isSpecialItem(item)) item.quality -= item.sellIn >= 0 ? 1 : 2;
+      if (item.quality < 0) item.quality = 0;
+      if (item.quality > 50) item.quality = 50;
+    });
     return this.items;
   }
 

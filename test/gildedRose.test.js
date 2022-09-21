@@ -156,6 +156,12 @@ describe("Gilded Rose", function () {
     expect(item.quality).toBe(50);
   });
 
+  it("restricts the quality to a range between 0-50", () => {
+    const gildedRose = newShop();
+    expect(gildedRose.restrictQualityToRange(-1)).toBe(0);
+    expect(gildedRose.restrictQualityToRange(52)).toBe(50);
+  });
+
   it("works with an array of multiple items", () => {
     const shopItems = [
       new Item("Aged Brie", 10, 10),
@@ -166,12 +172,12 @@ describe("Gilded Rose", function () {
     const resultItems = gildedRose.updateQuality();
     expect(resultItems[0].name).toBe("Aged Brie");
     expect(resultItems[0].sellIn).toBe(9);
-    expect(resultItems[0].sellIn).toBe(11);
+    expect(resultItems[0].quality).toBe(11);
     expect(resultItems[1].name).toBe("Conjured Mana Cake");
     expect(resultItems[1].sellIn).toBe(9);
-    expect(resultItems[1].sellIn).toBe(8);
-    expect(resultItems[1].name).toBe("foo");
-    expect(resultItems[1].sellIn).toBe(9);
-    expect(resultItems[1].sellIn).toBe(9);
+    expect(resultItems[1].quality).toBe(8);
+    expect(resultItems[2].name).toBe("foo");
+    expect(resultItems[2].sellIn).toBe(9);
+    expect(resultItems[2].quality).toBe(9);
   });
 });
