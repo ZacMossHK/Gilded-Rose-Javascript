@@ -19,6 +19,7 @@ class Shop {
     const conjuredItemCheck = this.conjuredItemCheck(this.items[0]);
     if (!(brieCheck || backstageCheck || sulfurasCheck || conjuredItemCheck))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
+    if (this.items[0].quality < 0) this.items[0].quality = 0;
     return this.items;
   }
 
