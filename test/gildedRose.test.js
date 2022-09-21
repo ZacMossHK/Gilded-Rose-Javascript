@@ -99,4 +99,12 @@ describe("Gilded Rose", function () {
     expect(item.sellIn).toBe(0);
     expect(item.quality).toBe(10);
   });
+
+  it("conjured: check method returns true", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.conjuredCheck(new Item("foo", 1, 1))).toBe(undefined);
+    expect(gildedRose.conjuredCheck(new Item("Conjured Mana Cake", 1, 1))).toBe(
+      true
+    );
+  });
 });
