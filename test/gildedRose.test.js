@@ -55,4 +55,39 @@ describe("Gilded Rose", function () {
     expect(item.sellIn).toBe(14);
     expect(item.quality).toBe(11);
   });
+
+  it("backstage passes: sellIn -1 and quality + 2 if 5 < sellIn <= 10", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10),
+    ]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(9);
+    expect(item.quality).toBe(12);
+  });
+
+  it("backstage passes: sellIn -1 and quality + 3 if 0 < sellIn <= 5", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10),
+    ]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(4);
+    expect(item.quality).toBe(13);
+  });
+
+  it("backstage passes: sellIn -1 and quality = 0 if sellIn === 0", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10),
+    ]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(-1);
+    expect(item.quality).toBe(0);
+  });
+
+  it("sulfuras: check method returns true", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.sulfurasCheck(new Item("foo", 1, 1))).toBe(undefined);
+    expect(
+      gildedRose.sulfurasCheck(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
+    ).toBe(true);
+  });
 });

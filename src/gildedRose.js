@@ -29,7 +29,17 @@ class Shop {
 
   backstagePassesCheck(item) {
     if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-      item.quality += 1;
+      item.quality++;
+      if (item.sellIn < 10) item.quality++;
+      if (item.sellIn < 5) item.quality++;
+      if (item.sellIn < 0) item.quality = 0;
+      return true;
+    }
+  }
+
+  sulfurasCheck(item) {
+    if (item.name === "Sulfuras, Hand of Ragnaros") {
+      item.sellIn++;
       return true;
     }
   }
