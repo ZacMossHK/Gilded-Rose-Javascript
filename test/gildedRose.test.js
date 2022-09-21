@@ -8,4 +8,9 @@ describe("Gilded Rose", function () {
     expect(items[0].sellIn).toBe(0);
     expect(items[0].quality).toBe(0);
   });
+
+  it("should decrement the sellIn and quality of a normal item", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+    const items = gildedRose.updateQuality();
+  });
 });
