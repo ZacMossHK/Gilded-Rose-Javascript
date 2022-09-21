@@ -120,6 +120,23 @@ describe("Gilded Rose", function () {
     expect(item.quality).toBe(6);
   });
 
+  it("checks whether the item is a special item", () => {
+    const gildedRose = new Shop();
+    expect(gildedRose.isSpecialItem(new Item("Aged Brie", 0, 10))).toBe(true);
+    expect(
+      gildedRose.isSpecialItem(new Item("Sulfuras, Hand of Ragnaros", 0, 10))
+    ).toBe(true);
+    expect(
+      gildedRose.isSpecialItem(
+        new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)
+      )
+    ).toBe(true);
+    expect(
+      gildedRose.isSpecialItem(new Item("Conjured Mana Cake", 0, 10))
+    ).toBe(true);
+    expect(gildedRose.isSpecialItem(new Item("foo", 0, 10)));
+  });
+
   it("item quality minimum is 0", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     const item = gildedRose.updateQuality()[0];
