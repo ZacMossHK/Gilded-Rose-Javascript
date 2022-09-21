@@ -157,7 +157,8 @@ describe("Gilded Rose", function () {
   });
 
   it("restricts the quality to a range between 0-50", () => {
-    const gildedRose = newShop();
+    const gildedRose = new Shop();
+    expect(gildedRose.restrictQualityToRange(30)).toBe(30);
     expect(gildedRose.restrictQualityToRange(-1)).toBe(0);
     expect(gildedRose.restrictQualityToRange(52)).toBe(50);
   });
