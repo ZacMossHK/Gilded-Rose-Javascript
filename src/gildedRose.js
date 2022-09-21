@@ -20,6 +20,7 @@ class Shop {
     if (!(brieCheck || backstageCheck || sulfurasCheck || conjuredItemCheck))
       this.items[0].quality -= this.items[0].sellIn >= 0 ? 1 : 2;
     if (this.items[0].quality < 0) this.items[0].quality = 0;
+    if (this.items[0].quality > 50) this.items[0].quality = 50;
     return this.items;
   }
 
