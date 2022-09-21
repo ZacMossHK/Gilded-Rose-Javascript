@@ -121,4 +121,11 @@ describe("Gilded Rose", function () {
     expect(item.sellIn).toBe(-1);
     expect(item.quality).toBe(6);
   });
+
+  it("items quality cannot go below 0", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(0);
+    expect(item.quality).toBe(0);
+  });
 });
