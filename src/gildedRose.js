@@ -13,7 +13,7 @@ class Shop {
 
   updateQuality() {
     if (this.items[0].name === "Aged Brie") {
-      this.items[0].quality++;
+      this.items[0].quality += this.items[0].sellIn > 0 ? 1 : 2;
     } else {
       this.items[0].quality -= this.items[0].sellIn > 0 ? 1 : 2;
     }
