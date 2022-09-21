@@ -1,10 +1,17 @@
 const { Shop, Item } = require("../src/gildedRose");
 
 describe("Gilded Rose", function () {
-  it("should decrement the sellIn and quality of a normal item by one if sellIn is greater than 0", () => {
+  it("normal item: sellIn -1 and quality -1 if sellIn is greater than 0", () => {
     const gildedRose = new Shop([new Item("foo", 1, 1)]);
     const item = gildedRose.updateQuality()[0];
     expect(item.sellIn).toBe(0);
     expect(item.sellIn).toBe(0);
+  });
+
+  it("normal item: sellIn -1 and quality-2 if sellIn is 0 or lower", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(-1);
+    expect(item.quality).toBe(-2);
   });
 });
