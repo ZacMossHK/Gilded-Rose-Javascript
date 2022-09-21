@@ -11,8 +11,8 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
+    this.items[0].quality -= this.items[0].sellIn > 0 ? 1 : 2;
     this.items[0].sellIn--;
-    this.items[0].quality -= this.items[0] < 0 ? 1 : 2;
     return this.items;
   }
 }
