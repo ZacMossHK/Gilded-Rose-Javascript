@@ -10,7 +10,9 @@ class Shop {
   constructor(items = []) {
     this.items = items;
   }
-  updateQuality() {}
+  updateQuality() {
+    return this.items;
+  }
 }
 
 module.exports = {
