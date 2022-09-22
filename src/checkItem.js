@@ -1,6 +1,7 @@
 class CheckItem {
   getItemToUpdate(item) {
     return (
+      this.isConjured(item) ||
       this.isSulfuras(item) ||
       this.isBackstagePasses(item) ||
       this.isAgedBrie(item) ||
@@ -19,6 +20,10 @@ class CheckItem {
 
   isSulfuras(item) {
     if (item.name === "Sulfuras, Hand of Ragnaros") return "Sulfuras";
+  }
+
+  isConjured(item) {
+    if (item.name === "Conjured Mana Cake") return "Conjured";
   }
 }
 

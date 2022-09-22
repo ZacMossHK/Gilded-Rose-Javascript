@@ -15,30 +15,47 @@ describe("CheckItem class", () => {
   });
 
   it("returns AgedBrie if Aged Brie", () => {
-    const item = new Item("Aged Brie", 1, 1);
     expect(checkItem.isAgedBrie(fooItem)).toBe(undefined);
-    expect(checkItem.isAgedBrie(item)).toBe("AgedBrie");
-    expect(checkItem.getItemToUpdate(item)).toBe("AgedBrie");
+    expect(checkItem.isAgedBrie(new Item("Aged Brie", 1, 1))).toBe("AgedBrie");
   });
 
   it("returns BackStagePasses if BackStage Passes", () => {
-    const item = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 1);
     expect(checkItem.isBackstagePasses(fooItem)).toBe(undefined);
-    expect(checkItem.isBackstagePasses(item)).toBe("BackstagePasses");
-    expect(checkItem.getItemToUpdate(item)).toBe("BackstagePasses");
+    expect(
+      checkItem.isBackstagePasses(
+        new Item("Backstage passes to a TAFKAL80ETC concert", 1, 1)
+      )
+    ).toBe("BackstagePasses");
   });
 
   it("returns Sulfuras if Sulfuras", () => {
-    const item = new Item("Sulfuras, Hand of Ragnaros", 1, 1);
     expect(checkItem.isSulfuras(fooItem)).toBe(undefined);
-    expect(checkItem.isSulfuras(item)).toBe("Sulfuras");
-    expect(checkItem.getItemToUpdate(item)).toBe("Sulfuras");
+    expect(
+      checkItem.isSulfuras(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
+    ).toBe("Sulfuras");
   });
 
   it("returns Conjured if Conjured item", () => {
-    const item = new Item("Conjured Mana Cake", 1, 1);
     expect(checkItem.isConjured(fooItem)).toBe(undefined);
-    expect(checkItem.isConjured(item)).toBe("Conjured");
-    expect(checkItem.getItemToUpdate(item)).toBe("Conjured");
+    expect(checkItem.isConjured(new Item("Conjured Mana Cake", 1, 1))).toBe(
+      "Conjured"
+    );
+  });
+
+  it("returns the special item from getItemToUpdate", () => {
+    expect(checkItem.getItemToUpdate(new Item("Aged Brie", 1, 1))).toBe(
+      "AgedBrie"
+    );
+    expect(
+      checkItem.getItemToUpdate(
+        new Item("Backstage passes to a TAFKAL80ETC concert", 1, 1)
+      )
+    ).toBe("BackstagePasses");
+    expect(
+      checkItem.getItemToUpdate(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
+    ).toBe("Sulfuras");
+    expect(
+      checkItem.getItemToUpdate(new Item("Conjured Mana Cake", 1, 1))
+    ).toBe("Conjured");
   });
 });
