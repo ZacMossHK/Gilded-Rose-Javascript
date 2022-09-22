@@ -1,6 +1,10 @@
 class CheckItem {
   getItemToUpdate(item) {
-    return "normalItem";
+    return this.isAgedBrie(item) || "normalItem";
+  }
+
+  isAgedBrie(item) {
+    if (item.name === "Aged Brie") return "agedBrie";
   }
 }
 
