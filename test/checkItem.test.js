@@ -17,4 +17,10 @@ describe("CheckItem class", () => {
     expect(checkItem.isAgedBrie(item)).toBe("agedBrie");
     expect(checkItem.getItemToUpdate(item)).toBe("agedBrie");
   });
+
+  it("returns backStagePasses if BackStage Passes", () => {
+    const item = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 1);
+    expect(checkItem.isBackstagePasses(item)).toBe("backstagePasses");
+    expect(checkItem.getItemToUpdate(item)).toBe("backstagePasses");
+  });
 });
