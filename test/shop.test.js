@@ -19,14 +19,10 @@ describe("Shop class", function () {
   });
 
   it("returns an item", () => {
-    const gildedRose = new Shop(
-      [new Item("foo", 1, 1)],
-      mockCheckItem,
-      mockUpdateItem
-    );
+    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
-    const item = gildedRose.updateQuality()[0];
+    const item = gildedRose.updateSingleItem(new Item("foo", 1, 1));
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
       new Item("foo", 1, 1)
     );
@@ -38,33 +34,11 @@ describe("Shop class", function () {
     expect(item.sellIn).toBe(0);
   });
 
-  // it("normal item: sellIn -1 and quality -1", () => {
-  //   const gildedRose = new Shop([new Item("foo", 1, 1)], mockSpecialItemCheck);
-  //   mockSpecialItemCheck.isSpecialItem.mockReturnValueOnce(false);
-  //   const item = gildedRose.updateQuality()[0];
-  //   expect(mockSpecialItemCheck.isSpecialItem).toHaveBeenCalled();
-  //   expect(item.sellIn).toBe(0);
-  //   expect(item.sellIn).toBe(0);
-  // });
-
-  // it("normal item: sellIn -1 and quality -2 if sellIn <= 0", () => {
-  //   const gildedRose = new Shop([new Item("foo", 0, 2)], mockSpecialItemCheck);
-  //   mockSpecialItemCheck.isSpecialItem.mockReturnValueOnce(false);
-  //   const item = gildedRose.updateQuality()[0];
-  //   expect(mockSpecialItemCheck.isSpecialItem).toHaveBeenCalled();
-  //   expect(item.sellIn).toBe(-1);
-  //   expect(item.quality).toBe(0);
-  // });
-
   it("item quality minimum is 0", () => {
-    const gildedRose = new Shop(
-      [new Item("foo", 0, 0)],
-      mockCheckItem,
-      mockUpdateItem
-    );
+    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", -1, -1));
-    const item = gildedRose.updateQuality()[0];
+    const item = gildedRose.updateSingleItem(new Item("foo", 0, 0));
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
       new Item("foo", 0, 0)
     );
@@ -76,14 +50,10 @@ describe("Shop class", function () {
   });
 
   it("item quality maximum is 50", () => {
-    const gildedRose = new Shop(
-      [new Item("foo", 1, 52)],
-      mockCheckItem,
-      mockUpdateItem
-    );
+    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 51));
-    const item = gildedRose.updateQuality()[0];
+    const item = gildedRose.updateSingleItem(new Item("foo", 1, 52));
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
       new Item("foo", 1, 52)
     );
@@ -105,6 +75,26 @@ describe("Shop class", function () {
     expect(gildedRose.restrictQualityToRange(new Item("foo", 1, 52))).toEqual(
       new Item("foo", 1, 50)
     );
+  });
+
+  it("returns an updated item from an array", () => {
+    const gildedRose = new Shop(
+      [new Item("foo", 1, 1)],
+      mockCheckItem,
+      mockUpdateItem
+    );
+    mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
+    mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
+    const item = gildedRose.updateQuality()[0];
+    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
+      new Item("foo", 1, 1)
+    );
+    expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
+      new Item("foo", 1, 1)
+    );
+    expect(item.name).toBe("foo");
+    expect(item.quality).toBe(0);
+    expect(item.sellIn).toBe(0);
   });
 
   it("works with an array of multiple items", () => {
