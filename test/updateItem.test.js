@@ -28,7 +28,7 @@ describe("UpdateItem class", () => {
 
   it("brie: increments brie quality x2 if sellIn <= 0", () => {
     expect(updateItem.agedBrie(new Item("Aged Brie", 0, 0))).toEqual(
-      new Item("Aged Brie", 0, 2)
+      new Item("Aged Brie", -1, 2)
     );
   });
 });
