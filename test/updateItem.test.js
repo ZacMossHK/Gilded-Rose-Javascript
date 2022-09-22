@@ -21,8 +21,8 @@ describe("UpdateItem class", () => {
   });
 
   it("brie: updates brie", () => {
-    expect(updateItem.agedBrie(new Item("Aged Brie,", 1, 1))).toEqual(
-      new Item("Aged Brie", 0, 1)
+    expect(updateItem.agedBrie(new Item("Aged Brie", 1, 1))).toEqual(
+      new Item("Aged Brie", 0, 2)
     );
   });
 });
