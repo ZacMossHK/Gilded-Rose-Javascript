@@ -5,25 +5,25 @@ class CheckItem {
       this.isSulfuras(item) ||
       this.isBackstagePasses(item) ||
       this.isAgedBrie(item) ||
-      "NormalItem"
+      "normalItem"
     );
   }
 
   isAgedBrie(item) {
-    if (item.name === "Aged Brie") return "AgedBrie";
+    if (item.name === "Aged Brie") return "agedBrie";
   }
 
   isBackstagePasses(item) {
     if (item.name === "Backstage passes to a TAFKAL80ETC concert")
-      return "BackstagePasses";
+      return "backstagePasses";
   }
 
   isSulfuras(item) {
-    if (item.name === "Sulfuras, Hand of Ragnaros") return "Sulfuras";
+    if (item.name === "Sulfuras, Hand of Ragnaros") return "sulfuras";
   }
 
   isConjured(item) {
-    if (item.name === "Conjured Mana Cake") return "Conjured";
+    if (item.name === "Conjured Mana Cake") return "conjured";
   }
 }
 
