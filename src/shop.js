@@ -6,13 +6,13 @@ class Shop {
   }
 
   updateQuality() {
-    return this.items.map((item) => updateSingleItem);
+    return this.items.map(this.updateSingleItem, this);
   }
 
   updateSingleItem(item) {
-    const itemToUpdate = this.checkItem.getItemToUpdate(item);
-    if (itemToUpdate === "sulfuras") return item;
-    return this.restrictQualityToRange(this.updateItem[itemToUpdate](item));
+    const itemType = this.checkItem.getItemToUpdate(item);
+    if (itemType === "sulfuras") return item;
+    return this.restrictQualityToRange(this.updateItem[itemType](item));
   }
 
   restrictQualityToRange(item) {
