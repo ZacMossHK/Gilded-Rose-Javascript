@@ -106,11 +106,4 @@ describe("Shop class", function () {
     expect(resultItems[1].sellIn).toBe(9);
     expect(resultItems[1].quality).toBe(9);
   });
-
-  it("throws an error if item is not an instance of item", () => {
-    const gildedRose = new Shop();
-    expect(() => {
-      gildedRose.updateSingleItem("foo");
-    }).toThrow(new Error("foo is not an item"));
-  });
 });
