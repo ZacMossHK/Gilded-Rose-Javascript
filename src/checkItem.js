@@ -1,17 +1,24 @@
 class CheckItem {
   getItemToUpdate(item) {
     return (
-      this.isBackstagePasses(item) || this.isAgedBrie(item) || "normalItem"
+      this.isSulfuras(item) ||
+      this.isBackstagePasses(item) ||
+      this.isAgedBrie(item) ||
+      "NormalItem"
     );
   }
 
   isAgedBrie(item) {
-    if (item.name === "Aged Brie") return "agedBrie";
+    if (item.name === "Aged Brie") return "AgedBrie";
   }
 
   isBackstagePasses(item) {
     if (item.name === "Backstage passes to a TAFKAL80ETC concert")
-      return "backstagePasses";
+      return "BackstagePasses";
+  }
+
+  isSulfuras(item) {
+    if (item.name === "Sulfuras, Hand of Ragnaros") return "Sulfuras";
   }
 }
 
