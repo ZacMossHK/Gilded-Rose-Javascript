@@ -14,7 +14,7 @@ describe("UpdateItem class", () => {
     );
   });
 
-  it("normalItem: decrememnts quality x2 if sellIn is 0", () => {
+  it("normalItem: decrememnts quality x2 if sellIn <= 0", () => {
     expect(updateItem.normalItem(new Item("foo", 0, 0))).toEqual(
       new Item("foo", -1, -2)
     );
@@ -22,6 +22,12 @@ describe("UpdateItem class", () => {
 
   it("brie: updates brie", () => {
     expect(updateItem.agedBrie(new Item("Aged Brie", 1, 1))).toEqual(
+      new Item("Aged Brie", 0, 2)
+    );
+  });
+
+  it("brie: increments brie quality x2 if sellIn <= 0", () => {
+    expect(updateItem.agedBrie(new Item("Aged Brie", 0, 0))).toEqual(
       new Item("Aged Brie", 0, 2)
     );
   });
