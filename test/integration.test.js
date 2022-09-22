@@ -4,6 +4,28 @@ const UpdateItem = require("../src/updateItem");
 const CheckItem = require("../src/checkItem");
 
 describe("Integration", () => {
+  it("normal item: sellIn -1 and quality -1", () => {
+    const gildedRose = new Shop(
+      [new Item("foo", 1, 1)],
+      new CheckItem(),
+      new UpdateItem()
+    );
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(0);
+    expect(item.quality).toBe(0);
+  });
+
+  it("normal item: sellIn -1 and quality -2", () => {
+    const gildedRose = new Shop(
+      [new Item("foo", 0, 2)],
+      new CheckItem(),
+      new UpdateItem()
+    );
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(-1);
+    expect(item.quality).toBe(0);
+  });
+
   it("brie: sellIn -1 and quality +1", () => {
     const gildedRose = new Shop(
       [new Item("Aged Brie", 1, 1)],
