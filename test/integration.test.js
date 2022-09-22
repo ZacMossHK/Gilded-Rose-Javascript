@@ -100,6 +100,26 @@ describe("Integration", () => {
     expect(item.quality).toBe(6);
   });
 
+  it("item quality minimum is 0", () => {
+    const gildedRose = new Shop(
+      [new Item("foo", 0, 0)],
+      new SpecialItemCheck()
+    );
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(-1);
+    expect(item.quality).toBe(0);
+  });
+
+  it("item quality maximum is 50", () => {
+    const gildedRose = new Shop(
+      [new Item("Aged Brie", 0, 50)],
+      new SpecialItemCheck()
+    );
+    const item = gildedRose.updateQuality()[0];
+    expect(item.sellIn).toBe(-1);
+    expect(item.quality).toBe(50);
+  });
+
   it("works with an array of multiple items", () => {
     const shopItems = [
       new Item("Aged Brie", 10, 10),

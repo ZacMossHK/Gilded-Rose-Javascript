@@ -27,7 +27,9 @@ describe("SpecialItemCheck class", () => {
   it("sulfuras: check method returns true", () => {
     expect(specialItemCheck.isSulfuras(new Item("foo", 1, 1))).toBe(undefined);
     expect(
-      specialItemCheck.isSulfuras(new Item("Sulfuras, Hand of Ragnaros", 1, 1))
+      specialItemCheck.isSulfuras(
+        new Item("Sulfuras, Hand of Ragnaros", 1, 1)
+      )``
     ).toBe(true);
   });
 

@@ -1,6 +1,6 @@
 # Gilded Rose
 
-This is the Gilded Rose kata in JavaScript with Jest
+This is the Gilded Rose kata in JavaScript with Jest.
 
 ## Getting started
 
@@ -29,3 +29,5 @@ To generate test coverage report
 ```sh
 npm run test:coverage
 ```
+
+I have approached this as to be easily changable
