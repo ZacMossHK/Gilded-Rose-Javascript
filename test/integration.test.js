@@ -1,12 +1,14 @@
 const Item = require("../src/item");
 const Shop = require("../src/shop");
-const SpecialItemCheck = require("../src/specialItemCheck");
+const UpdateItem = require("../src/updateItem");
+const CheckItem = require("../src/checkItem");
 
 describe("Integration", () => {
   it("brie: sellIn -1 and quality +1", () => {
     const gildedRose = new Shop(
       [new Item("Aged Brie", 1, 1)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
     const item = gildedRose.updateQuality()[0];
     expect(item.sellIn).toBe(0);
@@ -16,7 +18,8 @@ describe("Integration", () => {
   it("brie: sellIn -1 and quality +2", () => {
     const gildedRose = new Shop(
       [new Item("Aged Brie", 0, 0)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
     const item = gildedRose.updateQuality()[0];
     expect(item.sellIn).toBe(-1);
@@ -26,7 +29,8 @@ describe("Integration", () => {
   it("backstage passes: sellIn -1 and quality + 1", () => {
     const gildedRose = new Shop(
       [new Item("Backstage passes to a TAFKAL80ETC concert", 15, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -37,7 +41,8 @@ describe("Integration", () => {
   it("backstage passes: sellIn -1 and quality + 2 if 5 < sellIn <= 10", () => {
     const gildedRose = new Shop(
       [new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -48,7 +53,8 @@ describe("Integration", () => {
   it("backstage passes: sellIn -1 and quality + 3 if 0 < sellIn <= 5", () => {
     const gildedRose = new Shop(
       [new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -59,7 +65,8 @@ describe("Integration", () => {
   it("backstage passes: sellIn -1 and quality = 0 if sellIn === 0", () => {
     const gildedRose = new Shop(
       [new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -70,7 +77,8 @@ describe("Integration", () => {
   it("sulfuras: sellIn and quality do not change", () => {
     const gildedRose = new Shop(
       [new Item("Sulfuras, Hand of Ragnaros", 0, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -81,7 +89,8 @@ describe("Integration", () => {
   it("conjured: sellIn -1, quality -2", () => {
     const gildedRose = new Shop(
       [new Item("Conjured Mana Cake", 10, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -92,7 +101,8 @@ describe("Integration", () => {
   it("conjured: sellIn -1, quality -4 if sellIn <= 0", () => {
     const gildedRose = new Shop(
       [new Item("Conjured Mana Cake", 0, 10)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
 
     const item = gildedRose.updateQuality()[0];
@@ -103,7 +113,8 @@ describe("Integration", () => {
   it("item quality minimum is 0", () => {
     const gildedRose = new Shop(
       [new Item("foo", 0, 0)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
     const item = gildedRose.updateQuality()[0];
     expect(item.sellIn).toBe(-1);
@@ -113,7 +124,8 @@ describe("Integration", () => {
   it("item quality maximum is 50", () => {
     const gildedRose = new Shop(
       [new Item("Aged Brie", 0, 50)],
-      new SpecialItemCheck()
+      new CheckItem(),
+      new UpdateItem()
     );
     const item = gildedRose.updateQuality()[0];
     expect(item.sellIn).toBe(-1);
@@ -126,7 +138,7 @@ describe("Integration", () => {
       new Item("Conjured Mana Cake", 10, 10),
       new Item("foo", 10, 10),
     ];
-    const gildedRose = new Shop(shopItems, new SpecialItemCheck());
+    const gildedRose = new Shop(shopItems, new CheckItem(), new UpdateItem());
 
     const resultItems = gildedRose.updateQuality();
     expect(resultItems[0].name).toBe("Aged Brie");
