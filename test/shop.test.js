@@ -23,11 +23,9 @@ describe("Shop class", function () {
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
     const item = gildedRose.updateSingleItem(new Item("foo", 1, 1));
-    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
-      new Item("foo", 1, 1)
-    );
+    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
-      new Item("foo", 1, 1)
+      new Item("foo", 0, 1)
     );
     expect(item.name).toBe("foo");
     expect(item.quality).toBe(0);
@@ -39,11 +37,9 @@ describe("Shop class", function () {
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", -1, -1));
     const item = gildedRose.updateSingleItem(new Item("foo", 0, 0));
-    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
-      new Item("foo", 0, 0)
-    );
+    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
-      new Item("foo", 0, 0)
+      new Item("foo", -1, 0)
     );
     expect(item.sellIn).toBe(-1);
     expect(item.quality).toBe(0);
@@ -54,11 +50,9 @@ describe("Shop class", function () {
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 51));
     const item = gildedRose.updateSingleItem(new Item("foo", 1, 52));
-    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
-      new Item("foo", 1, 52)
-    );
+    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
-      new Item("foo", 1, 52)
+      new Item("foo", 0, 52)
     );
     expect(item.sellIn).toBe(0);
     expect(item.quality).toBe(50);
@@ -86,11 +80,9 @@ describe("Shop class", function () {
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
     const item = gildedRose.updateQuality()[0];
-    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledWith(
-      new Item("foo", 1, 1)
-    );
+    expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
-      new Item("foo", 1, 1)
+      new Item("foo", 0, 1)
     );
     expect(item.name).toBe("foo");
     expect(item.quality).toBe(0);

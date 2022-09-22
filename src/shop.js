@@ -12,6 +12,7 @@ class Shop {
   updateSingleItem(item) {
     const itemType = this.checkItem.getItemToUpdate(item);
     if (itemType === "sulfuras") return item;
+    item.sellIn--;
     return this.restrictQualityToRange(this.updateItem[itemType](item));
   }
 
