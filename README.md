@@ -59,7 +59,7 @@ There are five classes:
 - UpdateItem which updates the quality of the item based on the item type and days until expiration.
 - Shop which updates the shop's inventory.
 
-Items are deemed to have expired if Item.sellIn drops below 0 when updateQuality() runs.
+Items are deemed to have expired if Item.sellIn drops below 0 when updateQuality() runs. Normal items reduce quality by 1 every day until expired, when they decrement by 2 each day. Some items are special which means their sellIn and quality values will update differently to normal items.
 
 To add a special item add a method that checks for the item by name and returns a shortened camelcase name, and the change to the item's quality property to a method in UpdateItem that has the same name as the shortened camelcase name.
 
