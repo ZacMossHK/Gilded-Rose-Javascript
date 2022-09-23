@@ -1,8 +1,9 @@
 class Shop {
-  constructor(items = [], checkItem, updateItem) {
+  constructor(items = [], checkItem, updateItem, validateItem) {
     this.items = items;
     this.checkItem = checkItem;
     this.updateItem = updateItem;
+    this.validateItem = validateItem;
   }
 
   updateQuality() {
@@ -10,6 +11,7 @@ class Shop {
   }
 
   updateSingleItem(item) {
+    this.validateItem.validateAllProperties(item);
     const itemType = this.checkItem.getItemToUpdate(item);
     if (itemType === "sulfuras") return item;
     item.sellIn--;
