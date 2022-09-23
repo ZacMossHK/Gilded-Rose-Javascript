@@ -22,9 +22,10 @@ I have refactored this to be easily changable by seperating out the seperate con
 
 This program manages a shop inventory and is designed to be run once a day to update the quality property of each item in the inventory based on time in days until they expire.
 
-There are four classes:
+There are five classes:
 
 - Item which holds the information for individual items in the inventory.
+- ValidateItem which validates that the item is the correct class and the item's properties are all correct data types.
 - CheckItem which checks for item type based on the name of the item.
 - UpdateItem which updates the quality of the item based on the item type and days until expiration.
 - Shop which updates the shop's inventory.
