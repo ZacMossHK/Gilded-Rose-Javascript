@@ -1,7 +1,7 @@
 const Shop = require("../src/shop");
 const Item = require("../src/item");
 
-let mockCheckItem, mockUpdateItem;
+let mockCheckItem, mockUpdateItem, mockValidateItem;
 
 describe("Shop class", function () {
   beforeEach(() => {
@@ -11,6 +11,9 @@ describe("Shop class", function () {
     mockUpdateItem = {
       normalItem: jest.fn(),
     };
+    mockValidateItem = {
+      validateAllProperties: jest.fn(),
+    };
   });
 
   it("returns an empty array with no items", () => {
@@ -19,10 +22,16 @@ describe("Shop class", function () {
   });
 
   it("returns an item", () => {
-    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
+    const gildedRose = new Shop(
+      [],
+      mockCheckItem,
+      mockUpdateItem,
+      mockValidateItem
+    );
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
     const item = gildedRose.updateSingleItem(new Item("foo", 1, 1));
+    expect(mockValidateItem.validateAllProperties).toHaveBeenCalled();
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
       new Item("foo", 0, 1)
@@ -33,10 +42,16 @@ describe("Shop class", function () {
   });
 
   it("item quality minimum is 0", () => {
-    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
+    const gildedRose = new Shop(
+      [],
+      mockCheckItem,
+      mockUpdateItem,
+      mockValidateItem
+    );
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", -1, -1));
     const item = gildedRose.updateSingleItem(new Item("foo", 0, 0));
+    expect(mockValidateItem.validateAllProperties).toHaveBeenCalled();
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
       new Item("foo", -1, 0)
@@ -46,10 +61,16 @@ describe("Shop class", function () {
   });
 
   it("item quality maximum is 50", () => {
-    const gildedRose = new Shop([], mockCheckItem, mockUpdateItem);
+    const gildedRose = new Shop(
+      [],
+      mockCheckItem,
+      mockUpdateItem,
+      mockValidateItem
+    );
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 51));
     const item = gildedRose.updateSingleItem(new Item("foo", 1, 52));
+    expect(mockValidateItem.validateAllProperties).toHaveBeenCalled();
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
       new Item("foo", 0, 52)
@@ -75,11 +96,13 @@ describe("Shop class", function () {
     const gildedRose = new Shop(
       [new Item("foo", 1, 1)],
       mockCheckItem,
-      mockUpdateItem
+      mockUpdateItem,
+      mockValidateItem
     );
     mockCheckItem.getItemToUpdate.mockReturnValueOnce("normalItem");
     mockUpdateItem.normalItem.mockReturnValueOnce(new Item("foo", 0, 0));
     const item = gildedRose.updateQuality()[0];
+    expect(mockValidateItem.validateAllProperties).toHaveBeenCalled();
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalled();
     expect(mockUpdateItem.normalItem).toHaveBeenCalledWith(
       new Item("foo", 0, 1)
@@ -91,12 +114,18 @@ describe("Shop class", function () {
 
   it("works with an array of multiple items", () => {
     const shopItems = [new Item("foo", 0, 0), new Item("foo", 10, 10)];
-    const gildedRose = new Shop(shopItems, mockCheckItem, mockUpdateItem);
+    const gildedRose = new Shop(
+      shopItems,
+      mockCheckItem,
+      mockUpdateItem,
+      mockValidateItem
+    );
     mockCheckItem.getItemToUpdate.mockReturnValue("normalItem");
     mockUpdateItem.normalItem
       .mockReturnValueOnce(new Item("foo", -1, 0))
       .mockReturnValueOnce(new Item("foo", 9, 9));
     const resultItems = gildedRose.updateQuality();
+    expect(mockValidateItem.validateAllProperties).toHaveBeenCalledTimes(2);
     expect(mockCheckItem.getItemToUpdate).toHaveBeenCalledTimes(2);
     expect(mockUpdateItem.normalItem).toHaveBeenCalledTimes(2);
     expect(resultItems[0].name).toBe("foo");
