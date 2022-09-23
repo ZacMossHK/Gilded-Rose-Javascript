@@ -18,6 +18,35 @@ To run all tests
 jest
 ```
 
+## Running Gilded Rose
+
+```sh
+node
+> const Item = require("./src/item");
+> const Shop = require("./src/shop");
+> const CheckItem = require("./src/checkItem");
+> const UpdateItem = require("./src/updateItem");
+> const ValidateItem = require("./src/validateItem");
+> const items = [
+    new Item("+5 Dexterity Vest", 10, 20),
+    new Item("Aged Brie", 2, 0),
+    new Item("Elixir of the Mongoose", 5, 7),
+    new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+    new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+    new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+    new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+    new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+    new Item("Conjured Mana Cake", 3, 6),
+  ];
+> const gildedRose = new Shop(
+    items,
+    new CheckItem(),
+    new UpdateItem(),
+    new ValidateItem()
+  );
+> gildedRose.updateQuality();
+```
+
 I have refactored this to be easily changable by seperating out the seperate concerns of the program.
 
 This program manages a shop inventory and is designed to be run once a day to update the quality property of each item in the inventory based on time in days until they expire.
